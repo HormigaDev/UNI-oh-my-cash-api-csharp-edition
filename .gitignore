@@ -1,0 +1,38 @@
+## Build
+bin/
+obj/
+out/
+
+## User-specific
+.vscode/
+*.user
+*.suo
+*.userprefs
+*.csproj.user
+
+## IDEs
+*.sln.ide
+*.idea/
+.vscode/
+
+## EF Core
+Migrations/
+
+## ASP.NET Core Secrets
+**/secrets.json
+
+## Logs
+*.log
+
+## Dotnet tooling
+*.vs/
+.vs/
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Others (optional)
+*.swp
+*.bak
+*.tmp
