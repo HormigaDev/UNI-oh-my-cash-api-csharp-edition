@@ -1,6 +1,5 @@
 using App.Api.Filters;
 using App.Application.Interfaces;
-using App.Application.Validators;
 using App.Infrastructure.Data;
 using App.Infrastructure.Services;
 using FluentValidation;
