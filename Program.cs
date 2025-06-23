@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<HttpExceptionFilter>();
-});
+}).AddXmlSerializerFormatters();
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddValidatorsFromAssemblyContaining<AccountCreateValidator>();
