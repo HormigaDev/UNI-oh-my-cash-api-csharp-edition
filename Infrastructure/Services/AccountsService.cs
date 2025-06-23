@@ -23,10 +23,10 @@ public class AccountsService(AppDbContext context, IMapper mapper) : IAccountsSe
         return _mapper.Map<AccountDto>(account);
     }
 
-    public async Task<IEnumerable<AccountDto>> GetAllAsync()
+    public async Task<List<AccountDto>> GetAllAsync()
     {
         var accounts = await _context.Accounts.ToListAsync();
-        return _mapper.Map<IEnumerable<AccountDto>>(accounts);
+        return _mapper.Map<List<AccountDto>>(accounts);
     }
 
     public async Task<AccountDto> GetByIdAsync(int id)

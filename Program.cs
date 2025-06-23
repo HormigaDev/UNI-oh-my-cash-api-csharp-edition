@@ -60,7 +60,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => Results.Json(new
+app.MapGet("/", (HttpRequest req) => Results.Ok(new
 {
     name = "Oh My Cash API - C# Edition",
     version = "1.0.0",

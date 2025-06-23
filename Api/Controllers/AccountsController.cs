@@ -6,6 +6,12 @@ using App.Application.DTOs;
 using App.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
+public class ApiResponse<T>
+{
+    public string Message { get; set; } = null!;
+    public T Data { get; set; } = default!;
+}
+
 [ApiController]
 [Route("api/accounts")]
 public class AccountsController(IAccountsService accountsService) : ControllerBase
@@ -13,31 +19,51 @@ public class AccountsController(IAccountsService accountsService) : ControllerBa
     private readonly IAccountsService _accountsService = accountsService;
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<AccountDto>>> GetAll()
+    public async Task<ActionResult<ApiResponse<List<AccountDto>>>> GetAll()
     {
         var accounts = await _accountsService.GetAllAsync();
-        return Ok(new { message = "Contas recuperadas com sucesso", data = accounts });
+        var response = new ApiResponse<List<AccountDto>>
+        {
+            Message = "Contas recuperadas com sucesso",
+            Data = accounts
+        };
+        return Ok(response);
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<AccountDto>> GetById(int id)
+    public async Task<ActionResult<ApiResponse<AccountDto>>> GetById(int id)
     {
         var account = await _accountsService.GetByIdAsync(id);
-        return Ok(new { message = "Conta encontrada", data = account });
+        var response = new ApiResponse<AccountDto>
+        {
+            Message = "Conta encontrada",
+            Data = account
+        };
+        return Ok(response);
     }
 
     [HttpPost]
-    public async Task<ActionResult<AccountDto>> Create([FromBody] AccountCreateDto dto)
+    public async Task<ActionResult<ApiResponse<AccountDto>>> Create([FromBody] AccountCreateDto dto)
     {
         var created = await _accountsService.CreateAsync(dto);
-        return CreatedAtAction(nameof(GetById), new { id = created.Id }, new { message = "Conta criada com sucesso", data = created });
+        var response = new ApiResponse<AccountDto>
+        {
+            Message = "Conta criada com sucesso",
+            Data = created
+        };
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, response);
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> Update(int id, [FromBody] AccountUpdateDto dto)
+    public async Task<ActionResult<ApiResponse<object>>> Update(int id, [FromBody] AccountUpdateDto dto)
     {
         await _accountsService.UpdateAsync(id, dto);
-        return Ok(new { message = "Conta atualizada com sucesso" });
+        var response = new ApiResponse<object>
+        {
+            Message = "Conta atualizada com sucesso",
+            Data = new { }
+        };
+        return Ok(response);
     }
 
     [HttpDelete("{id:int}")]

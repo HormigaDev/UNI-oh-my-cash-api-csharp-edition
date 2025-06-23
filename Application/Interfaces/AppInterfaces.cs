@@ -8,7 +8,7 @@ namespace App.Application.Interfaces
     {
         Task<AccountDto> CreateAsync(AccountCreateDto dto);
         Task<AccountDto> GetByIdAsync(int id);
-        Task<IEnumerable<AccountDto>> GetAllAsync();
+        Task<List<AccountDto>> GetAllAsync();
         Task<AccountDto> UpdateAsync(int id, AccountUpdateDto dto);
         Task DeleteAsync(int id);
     }
@@ -17,7 +17,7 @@ namespace App.Application.Interfaces
     {
         Task<CategoryDto> CreateAsync(CategoryCreateDto dto);
         Task<CategoryDto> GetByIdAsync(int id);
-        Task<IEnumerable<CategoryDto>> GetAllAsync();
+        Task<List<CategoryDto>> GetAllAsync();
         Task<CategoryDto> UpdateAsync(int id, CategoryUpdateDto dto);
         Task DeleteAsync(int id);
     }
@@ -26,19 +26,19 @@ namespace App.Application.Interfaces
     {
         Task<TransactionDto> CreateAsync(TransactionCreateDto dto);
         Task<TransactionDto> GetByIdAsync(int id);
-        Task<IEnumerable<TransactionDto>> GetAllAsync();
+        Task<List<TransactionDto>> GetAllAsync();
         Task<TransactionDto> UpdateAsync(int id, TransactionUpdateDto dto);
         Task DeleteAsync(int id);
 
-        Task<IEnumerable<TransactionDto>> GetByAccountIdAsync(int accountId);
-        Task<IEnumerable<TransactionDto>> GetByCategoryIdAsync(int categoryId);
+        Task<List<TransactionDto>> GetByAccountIdAsync(int accountId);
+        Task<List<TransactionDto>> GetByCategoryIdAsync(int categoryId);
     }
 
     public interface IBudgetsService
     {
         Task<BudgetDto> CreateAsync(BudgetCreateDto dto);
         Task<BudgetDto> GetByIdAsync(int id);
-        Task<IEnumerable<BudgetDto>> GetAllAsync();
+        Task<List<BudgetDto>> GetAllAsync();
         Task<BudgetDto> UpdateAsync(int id, BudgetUpdateDto dto);
         Task DeleteAsync(int id);
 

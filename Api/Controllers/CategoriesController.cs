@@ -13,31 +13,47 @@ public class CategoriesController(ICategoriesService categoriesService) : Contro
     private readonly ICategoriesService _categoriesService = categoriesService;
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAll()
+    public async Task<ActionResult<ApiResponse<List<CategoryDto>>>> GetAll()
     {
         var categories = await _categoriesService.GetAllAsync();
-        return Ok(new { message = "Categorias recuperadas com sucesso", data = categories });
+        return Ok(new ApiResponse<List<CategoryDto>>
+        {
+            Message = "Categorias recuperadas com sucesso",
+            Data = categories
+        });
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<CategoryDto>> GetById(int id)
+    public async Task<ActionResult<ApiResponse<CategoryDto>>> GetById(int id)
     {
         var category = await _categoriesService.GetByIdAsync(id);
-        return Ok(new { message = "Categoria encontrada", data = category });
+        return Ok(new ApiResponse<CategoryDto>
+        {
+            Message = "Categoria encontrada",
+            Data = category
+        });
     }
 
     [HttpPost]
-    public async Task<ActionResult<CategoryDto>> Create([FromBody] CategoryCreateDto dto)
+    public async Task<ActionResult<ApiResponse<CategoryDto>>> Create([FromBody] CategoryCreateDto dto)
     {
         var created = await _categoriesService.CreateAsync(dto);
-        return CreatedAtAction(nameof(GetById), new { id = created.Id }, new { message = "Categoria criada com sucesso", data = created });
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, new ApiResponse<CategoryDto>
+        {
+            Message = "Categoria criada com sucesso",
+            Data = created
+        });
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> Update(int id, [FromBody] CategoryUpdateDto dto)
+    public async Task<ActionResult<ApiResponse<object>>> Update(int id, [FromBody] CategoryUpdateDto dto)
     {
         await _categoriesService.UpdateAsync(id, dto);
-        return Ok(new { message = "Categoria atualizada com sucesso" }) ;
+        return Ok(new ApiResponse<object>
+        {
+            Message = "Categoria atualizada com sucesso",
+            Data = new { }
+        });
     }
 
     [HttpDelete("{id:int}")]

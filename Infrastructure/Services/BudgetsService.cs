@@ -35,13 +35,13 @@ public class BudgetsService(AppDbContext context, IMapper mapper) : IBudgetsServ
         return _mapper.Map<BudgetDto>(budget);
     }
 
-    public async Task<IEnumerable<BudgetDto>> GetAllAsync()
+    public async Task<List<BudgetDto>> GetAllAsync()
     {
         var budgets = await _context.Budgets
             .Include(b => b.Category)
             .ToListAsync();
 
-        return _mapper.Map<IEnumerable<BudgetDto>>(budgets);
+        return _mapper.Map<List<BudgetDto>>(budgets);
     }
 
     public async Task<BudgetDto> UpdateAsync(int id, BudgetUpdateDto dto)

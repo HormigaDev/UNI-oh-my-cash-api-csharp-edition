@@ -43,14 +43,14 @@ public class TransactionsService(AppDbContext context, IMapper mapper) : ITransa
         return _mapper.Map<TransactionDto>(transaction);
     }
 
-    public async Task<IEnumerable<TransactionDto>> GetAllAsync()
+    public async Task<List<TransactionDto>> GetAllAsync()
     {
         var transactions = await _context.Transactions
             .Include(t => t.Account)
             .Include(t => t.Category)
             .ToListAsync();
 
-        return _mapper.Map<IEnumerable<TransactionDto>>(transactions);
+        return _mapper.Map<List<TransactionDto>>(transactions);
     }
 
     public async Task<TransactionDto> UpdateAsync(int id, TransactionUpdateDto dto)
@@ -106,7 +106,7 @@ public class TransactionsService(AppDbContext context, IMapper mapper) : ITransa
         await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<TransactionDto>> GetByAccountIdAsync(int accountId)
+    public async Task<List<TransactionDto>> GetByAccountIdAsync(int accountId)
     {
         var accountExists = await _context.Accounts.AnyAsync(a => a.Id == accountId);
         if (!accountExists)
@@ -118,10 +118,10 @@ public class TransactionsService(AppDbContext context, IMapper mapper) : ITransa
             .Include(t => t.Category)
             .ToListAsync();
 
-        return _mapper.Map<IEnumerable<TransactionDto>>(transactions);
+        return _mapper.Map<List<TransactionDto>>(transactions);
     }
 
-    public async Task<IEnumerable<TransactionDto>> GetByCategoryIdAsync(int categoryId)
+    public async Task<List<TransactionDto>> GetByCategoryIdAsync(int categoryId)
     {
         var categoryExists = await _context.Categories.AnyAsync(c => c.Id == categoryId);
         if (!categoryExists)
@@ -133,6 +133,6 @@ public class TransactionsService(AppDbContext context, IMapper mapper) : ITransa
             .Include(t => t.Category)
             .ToListAsync();
 
-        return _mapper.Map<IEnumerable<TransactionDto>>(transactions);
+        return _mapper.Map<List<TransactionDto>>(transactions);
     }
 }

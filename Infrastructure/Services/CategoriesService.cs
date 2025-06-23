@@ -29,10 +29,10 @@ public class CategoriesService(AppDbContext context, IMapper mapper) : ICategori
         return _mapper.Map<CategoryDto>(category);
     }
 
-    public async Task<IEnumerable<CategoryDto>> GetAllAsync()
+    public async Task<List<CategoryDto>> GetAllAsync()
     {
         var categories = await _context.Categories.ToListAsync();
-        return _mapper.Map<IEnumerable<CategoryDto>>(categories);
+        return _mapper.Map<List<CategoryDto>>(categories);
     }
 
     public async Task<CategoryDto> UpdateAsync(int id, CategoryUpdateDto dto)
