@@ -20,14 +20,6 @@ builder.Services.AddControllers(options =>
 }).AddXmlSerializerFormatters();
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-builder.Services.AddValidatorsFromAssemblyContaining<AccountCreateValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<AccountUpdateValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<CategoryCreateValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<CategoryUpdateValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<BudgetCreateValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<BudgetUpdateValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<TransactionCreateValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<TransactionUpdateValidator>();
 
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
