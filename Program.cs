@@ -51,13 +51,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", (HttpRequest req) => Results.Ok(new
-{
-    name = "Oh My Cash API - C# Edition",
-    version = "1.0.0",
-    author = "Isai Medina <HormigaDev hormigadev7@gmail.com>"
-}));
-
 app.MapControllers();
 
 app.Run();
